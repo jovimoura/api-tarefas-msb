@@ -8,36 +8,148 @@
 - Drizzle ORM
 
 ## Pré-requisitos
-- Docker e Docker Compose instalados
+
+### Instalação do Docker
+
+#### Windows
+1. Baixe e instale o [Docker Desktop para Windows](https://www.docker.com/products/docker-desktop/)
+2. Inicie o Docker Desktop
+3. Verifique a instalação:
+   ```bash
+   docker --version
+   docker compose version
+   ```
+
+#### Linux
+```bash
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install docker.io docker-compose-plugin
+
+# Ou instale o Docker Desktop
+```
+
+#### Mac
+1. Baixe e instale o [Docker Desktop para Mac](https://www.docker.com/products/docker-desktop/)
+2. Inicie o Docker Desktop
+
+**Nota:** O Docker Compose V2 (versão mais recente) usa `docker compose` (sem hífen). Se você tiver a versão antiga, use `docker-compose` (com hífen).
 
 ## Como Executar
 
-### 1. Clone o repositório
+### Opção 1: Usando Docker (Recomendado)
 
-```
+#### 1. Clone o repositório
+
+```bash
 git clone [url]
+cd api-tarefas-msb
 ```
 
-```
-cd [pasta]
-```
+#### 2. Configure as variáveis de ambiente
 
-### 2. Configure as variáveis de ambiente
+```bash
+# Windows (PowerShell)
+Copy-Item .env.example .env
 
-```
+# Linux/Mac
 cp .env.example .env
 ```
 
-### 3. Suba os containers
+Edite o arquivo `.env` se necessário (a configuração padrão já funciona para SQLite local).
 
+#### 3. Suba os containers
+
+**Docker Compose V2 (recomendado):**
+```bash
+docker compose up -d
 ```
+
+**Docker Compose V1 (versão antiga):**
+```bash
 docker-compose up -d
 ```
 
-### 4. Acesse a documentação da API
+Para ver os logs:
+```bash
+# Docker Compose V2
+docker compose logs -f
+
+# Docker Compose V1
+docker-compose logs -f
+```
+
+#### 4. Acesse a documentação da API
 
 ```
-http://localhost:[porta]/docs
+http://localhost:3333/docs
+```
+
+#### 5. Parar os containers
+
+```bash
+# Docker Compose V2
+docker compose down
+
+# Docker Compose V1
+docker-compose down
+```
+
+### Opção 2: Execução Local (Desenvolvimento)
+
+#### 1. Instale as dependências
+
+```bash
+npm install
+```
+
+#### 2. Configure as variáveis de ambiente
+
+```bash
+cp .env.example .env
+```
+
+#### 3. Execute a aplicação
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em `http://localhost:3333`
+
+## Troubleshooting
+
+### Erro: "docker-compose: command not found"
+
+Se você receber este erro, tente:
+
+1. **Verificar se o Docker está instalado:**
+   ```bash
+   docker --version
+   ```
+
+2. **Usar a sintaxe do Docker Compose V2:**
+   ```bash
+   docker compose up -d
+   ```
+   (Note: sem hífen entre `docker` e `compose`)
+
+3. **Se ainda não funcionar, instale o Docker Desktop:**
+   - Windows: [Docker Desktop para Windows](https://www.docker.com/products/docker-desktop/)
+   - Mac: [Docker Desktop para Mac](https://www.docker.com/products/docker-desktop/)
+   - Linux: Siga as instruções de instalação do Docker para sua distribuição
+
+### Erro: "Cannot connect to the Docker daemon"
+
+Certifique-se de que o Docker Desktop está rodando. No Windows/Mac, abra o Docker Desktop e aguarde até que ele esteja totalmente iniciado.
+
+### Porta 3333 já está em uso
+
+Se a porta 3333 já estiver em uso, você pode alterar a porta no `docker-compose.yml`:
+
+```yaml
+ports:
+  - "3334:3333"  # Altere 3334 para a porta desejada
 ```
 
 ## Como Executar os Testes
