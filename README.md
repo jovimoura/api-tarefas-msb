@@ -161,24 +161,28 @@ ports:
 ## Estrutura do Projeto
 
 ```bash
-projeto-teste/
-├── src/ # Código fonte da aplicação
-│ ├── controllers/ # ou equivalente na stack escolhida
-│ ├── models/
-│ ├── services/
-│ └── ...
-├── tests/ # Testes automatizados
-│ ├── unit/
-│ └── integration/
-├── docs/ # Documentação OpenAPI/Swagger
-├── docker-compose.yml # Containerização completa
-├── Dockerfile
-├── README.md # Instruções de execução
-├── DEV-WORKFLOW.md # [OBRIGATÓRIO] Configuração do fluxo com IA
-├── AI_WORKFLOW.md # [OBRIGATÓRIO] Registro do processo
-├── CLAUDE.md # [OBRIGATÓRIO] Contexto do projeto para Claude
-└── .claude/ # [DIFERENCIAL] Configurações do Claude Code
-└── settings.json # MCPs e configurações
+api-tarefas-msb/
+├── src/               # Código fonte da aplicação
+│   ├── routes/        # Definição das rotas Fastify
+│   ├── controllers/   # Controladores das rotas
+│   ├── db/            # Schema e migrations (Drizzle ORM)
+│   ├── services/      # Lógica de negócio
+│   ├── utils/         # Funções utilitárias e helpers
+│   └── index.ts       # Ponto de entrada do app
+├── tests/             # Testes automatizados
+│   ├── integration/   # Testes de integração das rotas
+│   └── unit/          # Testes unitários dos módulos
+├── docs/              # Documentação e especificação da API (OpenAPI)
+│   └── API_DOCUMENTATION.md
+├── docker-compose.yml # Configuração dos containers
+├── Dockerfile         # Build da imagem da API
+├── .env.example       # Exemplo de variáveis de ambiente
+├── README.md          # Instruções de execução e uso
+├── DEV-WORKFLOW.md    # [OBRIGATÓRIO] Configuração do fluxo com IA
+├── AI_WORKFLOW.md     # [OBRIGATÓRIO] Registro do processo IA
+├── CLAUDE.md          # [OBRIGATÓRIO] Contexto para Claude Code
+├── .claude/           # [DIFERENCIAL] Configurações do Claude Code
+└── settings.json      # MCPs e configurações do projeto
 ```
 
 ## Decisões Técnicas
