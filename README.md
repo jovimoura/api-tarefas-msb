@@ -164,25 +164,42 @@ ports:
 api-tarefas-msb/
 ├── src/               # Código fonte da aplicação
 │   ├── routes/        # Definição das rotas Fastify
-│   ├── controllers/   # Controladores das rotas
-│   ├── db/            # Schema e migrations (Drizzle ORM)
-│   ├── services/      # Lógica de negócio
-│   ├── utils/         # Funções utilitárias e helpers
+│   │   ├── categories.ts
+│   │   ├── online.ts
+│   │   ├── reports.ts
+│   │   └── tasks.ts
+│   ├── db/            # Schema e configuração do banco (Drizzle ORM)
+│   │   ├── index.ts
+│   │   └── schema.ts
+│   ├── lib/           # Funções utilitárias e helpers
+│   │   └── validations.ts
 │   └── index.ts       # Ponto de entrada do app
+├── drizzle/           # Migrations e schema do Drizzle ORM
+│   ├── meta/
+│   └── *.sql          # Arquivos de migração
 ├── tests/             # Testes automatizados
 │   ├── integration/   # Testes de integração das rotas
-│   └── unit/          # Testes unitários dos módulos
-├── docs/              # Documentação e especificação da API (OpenAPI)
-│   └── API_DOCUMENTATION.md
+│   │   ├── categories.test.ts
+│   │   ├── online.test.ts
+│   │   ├── reports.test.ts
+│   │   └── tasks.test.ts
+│   ├── unit/          # Testes unitários dos módulos
+│   │   └── validations.test.ts
+│   ├── helpers.ts     # Funções auxiliares para testes
+│   ├── setup.ts       # Configuração dos testes
+│   ├── setup-global.ts
+│   └── README.md
 ├── docker-compose.yml # Configuração dos containers
 ├── Dockerfile         # Build da imagem da API
+├── drizzle.config.ts  # Configuração do Drizzle ORM
+├── vitest.config.ts   # Configuração do Vitest
+├── package.json       # Dependências do projeto
 ├── .env.example       # Exemplo de variáveis de ambiente
 ├── README.md          # Instruções de execução e uso
-├── DEV-WORKFLOW.md    # [OBRIGATÓRIO] Configuração do fluxo com IA
-├── AI_WORKFLOW.md     # [OBRIGATÓRIO] Registro do processo IA
-├── CLAUDE.md          # [OBRIGATÓRIO] Contexto para Claude Code
-├── .claude/           # [DIFERENCIAL] Configurações do Claude Code
-└── settings.json      # MCPs e configurações do projeto
+├── API_DOCUMENTATION.md # Documentação da API
+├── DEV-WORKFLOW.md    # Configuração do fluxo com IA
+├── AI_WORKFLOW.md     # Registro do processo IA
+└── CLAUDE.md          # Contexto para Claude Code
 ```
 
 ## Decisões Técnicas
